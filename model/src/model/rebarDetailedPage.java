@@ -29,15 +29,13 @@ public class rebarDetailedPage {
     /**
      * 初始化鋼筋報價。會以"鋼筋編號: x 價格:y(元/cm)來表示。
      * 目前先以text形式建立，在做UI時必須改為GUI。
-     * @throws SQLException 若在DBConnector.connectToDB()出錯或是此方法本身出錯，都會拋出此錯誤。
      */
-    public void initialiseDetailedPage()
-            throws SQLException {
+    public void initialiseDetailedPage() {
         try {
             this.conn = DBConnector.connectToDB();
             System.out.println("實體化SQL語句...");
             this.stmt = this.conn.createStatement();
-            this.sql = "SELECT * FROM rebar;";
+            this.sql = "SELECT * FROM rebar ORDER BY rebar_number;";
             this.rs = this.stmt.executeQuery(sql);
 
             int basicRevenue = 0;
@@ -59,6 +57,26 @@ public class rebarDetailedPage {
         } catch (SQLException se) {
             closeResourceInException();
             se.printStackTrace();
+        }
+    }
+
+    /**
+     * 方法，用於新增新種類編號的鋼筋以及其價格。
+     * @param rebarNumber 鋼筋編號。
+     * @param price 其價格。
+     */
+    public void addNewRebar(int rebarNumber, float price) {
+        if (!this.rebarDetails.containsKey(rebarNumber)) {
+            try {
+                this.sql = "INSERT INTO rebar (rebar_number, price_per_cm, basic_revenue) VALUES" + "(" + rebarNumber
+                        + ", " + price + ", 1000)";
+                this.stmt.executeUpdate(this.sql);
+            } catch (SQLException e) {
+                closeResourceInException();
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("此種鋼筋已存在。");
         }
     }
 
@@ -86,12 +104,15 @@ public class rebarDetailedPage {
 
     /**
      * 方法，用於關閉資源
-     * @throws SQLException 查詢時發生的錯誤。
      */
-    public void closeResource() throws SQLException {
+    public void closeResource(){
+        if (this.sql!= null) {
+            this.sql = null;
+        }
         if (this.rs != null) {
             try {
                 this.rs.close();
+                this.rs = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -99,6 +120,7 @@ public class rebarDetailedPage {
         if (this.stmt != null) {
             try {
                 this.stmt.close();
+                this.stmt = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -106,6 +128,7 @@ public class rebarDetailedPage {
         if (this.conn != null) {
             try {
                 this.conn.close();
+                this.conn = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -117,9 +140,13 @@ public class rebarDetailedPage {
      * 關閉所有資源。
      */
     public void closeResourceInException() {
+        if (this.sql!= null) {
+            this.sql = null;
+        }
         if (this.rs != null) {
             try {
                 this.rs.close();
+                this.rs = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -127,6 +154,7 @@ public class rebarDetailedPage {
         if (this.stmt != null) {
             try {
                 this.stmt.close();
+                this.stmt = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -134,6 +162,7 @@ public class rebarDetailedPage {
         if (this.conn != null) {
             try {
                 this.conn.close();
+                this.conn = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -147,7 +176,7 @@ public class rebarDetailedPage {
     public void redraw() throws SQLException {
         try {
             this.rebarDetails.clear();
-            this.sql = "SELECT * FROM rebar;";
+            this.sql = "SELECT * FROM rebar ORDER BY rebar_number;";
             this.rs = this.stmt.executeQuery(sql);
 
             int basicRevenue = 0;
@@ -172,11 +201,7 @@ public class rebarDetailedPage {
         }
     }
     public static void main(String[] args) throws SQLException {
-        rebarDetailedPage a = new rebarDetailedPage();
-        System.out.println();
-        a.editRebarDetail(3, 1.0f);
-        System.out.println();
-        a.redraw();
-        a.closeResource();
+        rebarDetailedPage test = new rebarDetailedPage();
+        test.editRebarDetail(100, 100.0f);
     }
 }
