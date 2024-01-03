@@ -15,9 +15,8 @@ public class rebarDetailedPage {
 
     /**
      * 初始化rebarDetailedPage頁面。
-     * @throws SQLException SQL錯誤。
      */
-    public rebarDetailedPage() throws SQLException {
+    public rebarDetailedPage(){
         this.rebarDetails = new HashMap<>();
         this.rs = null;
         this.stmt = null;
@@ -55,7 +54,7 @@ public class rebarDetailedPage {
             }
             System.out.println("出車費為: " + basicRevenue + "元");
         } catch (SQLException se) {
-            closeResourceInException();
+            closeResource();
             se.printStackTrace();
         }
     }
@@ -72,7 +71,7 @@ public class rebarDetailedPage {
                         + ", " + price + ", 1000)";
                 this.stmt.executeUpdate(this.sql);
             } catch (SQLException e) {
-                closeResourceInException();
+                closeResource();
                 e.printStackTrace();
             }
         } else {
@@ -94,11 +93,25 @@ public class rebarDetailedPage {
                 this.stmt.executeUpdate(this.sql);
                 System.out.println("完成！");
             } catch (SQLException e) {
-                closeResourceInException();
+                closeResource();
                 e.printStackTrace();
             }
         } else {
             System.out.println("未知的鋼筋編號");
+        }
+    }
+
+    public void deleteRebar(int rebarNumber) {
+        if (this.rebarDetails.containsKey(rebarNumber)) {
+            try {
+                this.sql = "DELETE FROM rebar WHERE rebar_number = " + rebarNumber;
+                System.out.println("正在刪除...");
+                this.stmt.executeUpdate(this.sql);
+                System.out.println("完成！");
+            } catch (SQLException e) {
+                closeResource();
+                e.printStackTrace();
+            }
         }
     }
 
@@ -135,45 +148,11 @@ public class rebarDetailedPage {
         }
     }
 
-    /**
-     * 方法，放置於每個使用到JDBC連接到MySQL的方法，放在Exception語句當中，用於確保在使用JDBC的try catch當中若catch到Exception時也能保證
-     * 關閉所有資源。
-     */
-    public void closeResourceInException() {
-        if (this.sql!= null) {
-            this.sql = null;
-        }
-        if (this.rs != null) {
-            try {
-                this.rs.close();
-                this.rs = null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (this.stmt != null) {
-            try {
-                this.stmt.close();
-                this.stmt = null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (this.conn != null) {
-            try {
-                this.conn.close();
-                this.conn = null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * 重繪方法，用於除了初始化頁面方法後的所有details繪製。
-     * @throws SQLException 出錯時拋出。
      */
-    public void redraw() throws SQLException {
+    public void redraw() {
         try {
             this.rebarDetails.clear();
             this.sql = "SELECT * FROM rebar ORDER BY rebar_number;";
@@ -196,12 +175,12 @@ public class rebarDetailedPage {
             }
             System.out.println("出車費為: " + basicRevenue + "元");
         } catch (SQLException se) {
-            closeResourceInException();
+            closeResource();
             se.printStackTrace();
         }
     }
-    public static void main(String[] args) throws SQLException {
-        rebarDetailedPage test = new rebarDetailedPage();
-        test.editRebarDetail(100, 100.0f);
+    public static void main(String[] args) {
+        rebarDetailedPage a = new rebarDetailedPage();
+        a.deleteRebar(3);
     }
 }

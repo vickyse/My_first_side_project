@@ -4,7 +4,7 @@ import java.sql.*; // 導入JDBC。
 /**
  * 定義try_JDBC。第一次嘗試JDBC，於2023/12/26
  */
-public class try_JDBC {
+public class tryJDBC {
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     // 使用JDBC的時候都必須要有這一行。

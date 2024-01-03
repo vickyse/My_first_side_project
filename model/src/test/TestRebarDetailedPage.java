@@ -149,12 +149,4 @@ public class TestRebarDetailedPage {
         Assert.assertNull(test.stmt);
         Assert.assertNull(test.conn);
     }
-
-    //TODO
-    //    @Test
-    //    public void closeResourceInException() throws SQLException {
-    //        rebarDetailedPage test = new rebarDetailedPage();
-    //        test.editRebarDetail(100, 100.0f);
-    //        // 營造將會產生SQLException的情境。
-    //    }
 }
