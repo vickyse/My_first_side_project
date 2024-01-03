@@ -9,11 +9,12 @@ public class tryJDBC {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     // 使用JDBC的時候都必須要有這一行。
     static final String DB_URL =
-            "jdbc:mysql://127.0.0.1:3306/side_project?user=root";
+            "jdbc:mysql://sideproject.cdwguw44yf2n.ap-southeast-2.rds.amazonaws.com:3306/" +
+                    "side_project?user=admin";
     // 使用JDBC必須要指定連接的伺服器，也就是user=root這行，root即為MySQL中的伺服器名稱。
     // side_project則為此伺服器中的DB名稱。
 
-    static final String USER = "root";
+    static final String USER = "admin";
     static final String PASSWORD = "f131078696";
     //以上兩行為使用此數據庫的帳號以及密碼。
     //以上全部為使用JDBC將JAVA連接到mySQL的固定用法

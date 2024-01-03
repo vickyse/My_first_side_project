@@ -181,6 +181,5 @@ public class rebarDetailedPage {
     }
     public static void main(String[] args) {
         rebarDetailedPage a = new rebarDetailedPage();
-        a.deleteRebar(3);
     }
 }

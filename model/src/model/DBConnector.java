@@ -9,9 +9,10 @@ import java.sql.SQLException;
  */
 public class DBConnector {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver"; // 固定用法。
-    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/side_project?user=root";
+    static final String DB_URL = "jdbc:mysql://sideproject.cdwguw44yf2n.ap-southeast-2.rds.amazonaws.com:3306/" +
+            "side_project?user=admin";
     // 專案DB的URL。
-    static final String USER = "root";
+    static final String USER = "admin";
     // 專案DB的使用者名稱。
     static final String PASSWORD = "f131078696";
     // 專案DB的密碼。
