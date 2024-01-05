@@ -112,6 +112,8 @@ public class rebarDetailedPage {
                 closeResource();
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("此鋼筋不存在。");
         }
     }
 
@@ -179,7 +181,21 @@ public class rebarDetailedPage {
             se.printStackTrace();
         }
     }
+    //TODO 修改出車費。
+    public void editBasicRevenue(int newBasicRevenue) {
+        try {
+            this.sql = "UPDATE rebar SET basic_revenue =" + newBasicRevenue + "WHERE rebar_number != 100;";
+            System.out.println("正在修改...");
+            this.stmt.executeUpdate(this.sql);
+            System.out.println("完成！");
+        } catch (SQLException se) {
+            closeResource();
+            se.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         rebarDetailedPage a = new rebarDetailedPage();
+        a.editBasicRevenue(100);
     }
 }

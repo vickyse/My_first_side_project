@@ -18,7 +18,7 @@ public class TestRebarDetailedPage {
      * 測試rebarDetailedPage類別的初始化。
      */
     @Test
-    public void testInitialiseDetailedPage() throws SQLException {
+    public void testInitialiseDetailedPage() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         // ByteArrayOutputStream是一個數組類別，用以承載原先打印到終端機上的輸出內容，並一個一個以字符的型態儲存。
         System.setOut(new PrintStream(outputStream));
@@ -137,10 +137,9 @@ public class TestRebarDetailedPage {
 
     /**
      * 測試正確執行SQL操作後是否關閉資源。
-     * @throws SQLException SQL出錯時拋出。
      */
     @Test
-    public void testCloseResource() throws SQLException {
+    public void testCloseResource() {
         rebarDetailedPage test = new rebarDetailedPage();
         test.closeResource();
 
@@ -148,5 +147,73 @@ public class TestRebarDetailedPage {
         Assert.assertNull(test.rs);
         Assert.assertNull(test.stmt);
         Assert.assertNull(test.conn);
+    }
+
+    /**
+     * 測試刪除某個鋼筋的操作是否正確執行。
+     */
+    @Test
+    public void testDeleteRebar() {
+        rebarDetailedPage test = new rebarDetailedPage();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        test.deleteRebar(3);
+        test.redraw();
+        String testTerminalString = """
+                正在刪除...
+                完成！
+                鋼筋編號: #4 價格為: 1.0(元/每公分深度)
+                鋼筋編號: #5 價格為: 1.36(元/每公分深度)
+                鋼筋編號: #6 價格為: 2.235(元/每公分深度)
+                鋼筋編號: #7 價格為: 3.578(元/每公分深度)
+                鋼筋編號: #8 價格為: 4.095(元/每公分深度)
+                鋼筋編號: #10 價格為: 3.833(元/每公分深度)
+                出車費為: 1000元
+                """;
+        Assert.assertEquals(testTerminalString, outputStream.toString());
+        System.setOut(System.out);
+    }
+
+    /**
+     * 測試刪除某個不存在的鋼筋。
+     */
+    @Test
+    public void testDeleteRebarButNotFound() {
+        rebarDetailedPage test = new rebarDetailedPage();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        test.deleteRebar(100);
+        String testTerminalString = "此鋼筋不存在。\n";
+        Assert.assertEquals(testTerminalString, outputStream.toString());
+        System.setOut(System.out);
+    }
+    // redraw()不需要測試因為在前列任何有修改資料庫的方法測試中都已經有測試到了。
+
+    //TODO test修改出車費。
+    @Test
+    public void testEditBasicRevenue() {
+        rebarDetailedPage test = new rebarDetailedPage();
+        test.editBasicRevenue(10);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        test.redraw();
+        String testTerminalString = """
+                鋼筋編號: #3 價格為: 1.0(元/每公分深度)
+                鋼筋編號: #4 價格為: 1.0(元/每公分深度)
+                鋼筋編號: #5 價格為: 1.36(元/每公分深度)
+                鋼筋編號: #6 價格為: 2.235(元/每公分深度)
+                鋼筋編號: #7 價格為: 3.578(元/每公分深度)
+                鋼筋編號: #8 價格為: 4.095(元/每公分深度)
+                鋼筋編號: #10 價格為: 3.833(元/每公分深度)
+                出車費為: 10元
+                """;
+        Assert.assertEquals(testTerminalString, outputStream.toString());
+        System.setOut(System.out);
     }
 }
