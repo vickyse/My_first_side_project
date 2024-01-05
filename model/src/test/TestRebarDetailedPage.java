@@ -136,20 +136,6 @@ public class TestRebarDetailedPage {
     }
 
     /**
-     * 測試正確執行SQL操作後是否關閉資源。
-     */
-    @Test
-    public void testCloseResource() {
-        rebarDetailedPage test = new rebarDetailedPage();
-        test.closeResource();
-
-        Assert.assertNull(test.sql);
-        Assert.assertNull(test.rs);
-        Assert.assertNull(test.stmt);
-        Assert.assertNull(test.conn);
-    }
-
-    /**
      * 測試刪除某個鋼筋的操作是否正確執行。
      */
     @Test
@@ -193,7 +179,9 @@ public class TestRebarDetailedPage {
     }
     // redraw()不需要測試因為在前列任何有修改資料庫的方法測試中都已經有測試到了。
 
-    //TODO test修改出車費。
+    /**
+     * 測試是否可以修改出車費。
+     */
     @Test
     public void testEditBasicRevenue() {
         rebarDetailedPage test = new rebarDetailedPage();
@@ -215,5 +203,19 @@ public class TestRebarDetailedPage {
                 """;
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+    }
+
+    /**
+     * 測試正確執行SQL操作後是否關閉資源。
+     */
+    @Test
+    public void testCloseResource() {
+        rebarDetailedPage test = new rebarDetailedPage();
+        test.closeResource();
+
+        Assert.assertNull(test.sql);
+        Assert.assertNull(test.rs);
+        Assert.assertNull(test.stmt);
+        Assert.assertNull(test.conn);
     }
 }

@@ -118,38 +118,20 @@ public class rebarDetailedPage {
     }
 
     /**
-     * 方法，用於關閉資源
+     * 修改植筋的出車費。
+     * @param newBasicRevenue 欲修改的出車費。
      */
-    public void closeResource(){
-        if (this.sql!= null) {
-            this.sql = null;
-        }
-        if (this.rs != null) {
-            try {
-                this.rs.close();
-                this.rs = null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (this.stmt != null) {
-            try {
-                this.stmt.close();
-                this.stmt = null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (this.conn != null) {
-            try {
-                this.conn.close();
-                this.conn = null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    public void editBasicRevenue(int newBasicRevenue) {
+        try {
+            this.sql = "UPDATE rebar SET basic_revenue =" + newBasicRevenue + " WHERE rebar_number != 100;";
+            System.out.println("正在修改...");
+            this.stmt.executeUpdate(this.sql);
+            System.out.println("完成！");
+        } catch (SQLException se) {
+            closeResource();
+            se.printStackTrace();
         }
     }
-
 
     /**
      * 重繪方法，用於除了初始化頁面方法後的所有details繪製。
@@ -181,21 +163,37 @@ public class rebarDetailedPage {
             se.printStackTrace();
         }
     }
-    //TODO 修改出車費。
-    public void editBasicRevenue(int newBasicRevenue) {
-        try {
-            this.sql = "UPDATE rebar SET basic_revenue =" + newBasicRevenue + "WHERE rebar_number != 100;";
-            System.out.println("正在修改...");
-            this.stmt.executeUpdate(this.sql);
-            System.out.println("完成！");
-        } catch (SQLException se) {
-            closeResource();
-            se.printStackTrace();
-        }
-    }
 
-    public static void main(String[] args) {
-        rebarDetailedPage a = new rebarDetailedPage();
-        a.editBasicRevenue(100);
+    /**
+     * 方法，用於關閉資源
+     */
+    public void closeResource(){
+        if (this.sql!= null) {
+            this.sql = null;
+        }
+        if (this.rs != null) {
+            try {
+                this.rs.close();
+                this.rs = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (this.stmt != null) {
+            try {
+                this.stmt.close();
+                this.stmt = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (this.conn != null) {
+            try {
+                this.conn.close();
+                this.conn = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

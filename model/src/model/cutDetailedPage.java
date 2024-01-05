@@ -33,6 +33,12 @@ public class cutDetailedPage extends rebarDetailedPage{
             se.printStackTrace();
         }
     }
+
+    /**
+     * 方法，修改切割每公分價格。
+     * @param price 欲修改價格。
+     * @throws SQLException SQL出錯時拋出。
+     */
     public void editCutPrice(int price) throws SQLException {
         try{
             this.sql = "UPDATE cut SET price_per_cm = " + price;
@@ -45,6 +51,25 @@ public class cutDetailedPage extends rebarDetailedPage{
         }
     }
 
+    /**
+     * 方法，修改切割工程的出車費。
+     * @param newBasicRevenue 欲修改得出車費。
+     */
+    public void editBasicRevenue(int newBasicRevenue) {
+        try {
+            this.sql = "UPDATE cut SET basic_revenue =" + newBasicRevenue + " WHERE price_per_cm != -1;";
+            System.out.println("正在修改...");
+            this.stmt.executeUpdate(this.sql);
+            System.out.println("完成！");
+        } catch (SQLException se) {
+            closeResource();
+            se.printStackTrace();
+        }
+    }
+
+    /**
+     * 重繪切割的detailed page，用於使用其他增刪查改方法之後。
+     */
     @Override
     public void redraw() {
         try {
@@ -64,5 +89,4 @@ public class cutDetailedPage extends rebarDetailedPage{
             se.printStackTrace();
         }
     }
-    //TODO 修改出車費。
 }

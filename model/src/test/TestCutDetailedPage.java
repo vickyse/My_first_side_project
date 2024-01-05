@@ -1,6 +1,7 @@
 package test;
 
 import model.cutDetailedPage;
+import model.rebarDetailedPage;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,6 +35,10 @@ public class TestCutDetailedPage {
         // 將輸出目的地改回終端機。
     }
 
+    /**
+     * 測試更改切割每公分價格。
+     * @throws SQLException
+     */
     @Test
     public void testEditCutPrice() throws SQLException {
         cutDetailedPage test = new cutDetailedPage();
@@ -52,6 +57,26 @@ public class TestCutDetailedPage {
     }
 
     /**
+     * 測試修改切割的出車費。
+     */
+    @Test
+    public void testEditBasicRevenue() {
+        cutDetailedPage test = new cutDetailedPage();
+        test.editBasicRevenue(10);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        test.redraw();
+        String testTerminalString = """
+                切割: 1cm價格為10元
+                出車費為: 10元
+                """;
+        Assert.assertEquals(testTerminalString, outputStream.toString());
+        System.setOut(System.out);
+    }
+
+    /**
      * 測試正確執行SQL操作後是否關閉資源。
      */
     @Test
@@ -64,6 +89,5 @@ public class TestCutDetailedPage {
         Assert.assertNull(test.stmt);
         Assert.assertNull(test.conn);
     }
-    //TODO testRedraw();
-    //TODO test修改出車費。
 }
+
