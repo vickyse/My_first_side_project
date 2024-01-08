@@ -1,7 +1,6 @@
 package test;
 
 import model.cutDetailedPage;
-import model.rebarDetailedPage;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,10 +36,9 @@ public class TestCutDetailedPage {
 
     /**
      * 測試更改切割每公分價格。
-     * @throws SQLException
      */
     @Test
-    public void testEditCutPrice() throws SQLException {
+    public void testEditCutPrice() {
         cutDetailedPage test = new cutDetailedPage();
         test.editCutPrice(10);
 

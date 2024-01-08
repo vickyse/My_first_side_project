@@ -1,13 +1,13 @@
 package model;
 import java.sql.*; // 導入JDBC。
-import java.util.HashMap;
+import java.util.LinkedHashMap; // 不使用HashMap的原因為HashMap的存儲是沒有依照SQL查詢順序的。
 import java.util.Map;
 
 /**
  * 定義植筋、鋼筋頁面。
  */
 public class rebarDetailedPage {
-    public HashMap<Integer, Float> rebarDetails; // 屬性，用於儲存從MySQL中獲取的資料。
+    public LinkedHashMap<Integer, Float> rebarDetails; // 屬性，用於儲存從MySQL中獲取的資料。
     public ResultSet rs;
     public Statement stmt;
     public Connection conn;
@@ -16,8 +16,8 @@ public class rebarDetailedPage {
     /**
      * 初始化rebarDetailedPage頁面。
      */
-    public rebarDetailedPage(){
-        this.rebarDetails = new HashMap<>();
+    public rebarDetailedPage() {
+        this.rebarDetails = new LinkedHashMap<>();
         this.rs = null;
         this.stmt = null;
         this.conn = null;
@@ -64,6 +64,7 @@ public class rebarDetailedPage {
      * @param rebarNumber 鋼筋編號。
      * @param price 其價格。
      */
+    //TODO : 之後記得添加若是參數資料型態不符規定時的處理
     public void addNewRebar(int rebarNumber, float price) {
         if (!this.rebarDetails.containsKey(rebarNumber)) {
             try {
@@ -84,6 +85,7 @@ public class rebarDetailedPage {
      * @param rebarNumber 鋼筋編號。
      * @param price 欲修改的價格。
      */
+    //TODO : 之後記得添加若是參數資料型態不符規定時的處理
     public void editRebarDetail(int rebarNumber, float price) {
         if (this.rebarDetails.containsKey(rebarNumber)) {
             try {
@@ -101,6 +103,11 @@ public class rebarDetailedPage {
         }
     }
 
+    /**
+     * 方法，刪除指定鋼筋。
+     * @param rebarNumber 鋼筋編號。
+     */
+    //TODO : 之後記得添加若是參數資料型態不符規定時的處理
     public void deleteRebar(int rebarNumber) {
         if (this.rebarDetails.containsKey(rebarNumber)) {
             try {
@@ -121,6 +128,7 @@ public class rebarDetailedPage {
      * 修改植筋的出車費。
      * @param newBasicRevenue 欲修改的出車費。
      */
+    //TODO : 之後記得添加若是參數資料型態不符規定時的處理
     public void editBasicRevenue(int newBasicRevenue) {
         try {
             this.sql = "UPDATE rebar SET basic_revenue =" + newBasicRevenue + " WHERE rebar_number != 100;";

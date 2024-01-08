@@ -17,3 +17,11 @@ WHERE rebar_number != -1;
 UPDATE cut SET basic_revenue = 2500
 WHERE basic_revenue != -1;
 -- 在測試cut testEditBasicRevenue之後執行。
+
+DELETE FROM hole_wash
+WHERE (size, depth) = (1, 105); 
+-- 在測試hole_wash testAddNewHoleDetails之後執行。
+
+INSERT INTO hole_wash (size, depth, price, basic_revenue) VALUES
+(1, 15, 350, 1000);
+-- 在測試hole_wash testtestDeleteHole之後執行。

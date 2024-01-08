@@ -7,7 +7,7 @@ public class cutDetailedPage extends rebarDetailedPage{
     /**
      * 初始化cutDetailedPage頁面。
      */
-    public cutDetailedPage(){
+    public cutDetailedPage() {
         super();
     } // 初始化。
 
@@ -37,9 +37,9 @@ public class cutDetailedPage extends rebarDetailedPage{
     /**
      * 方法，修改切割每公分價格。
      * @param price 欲修改價格。
-     * @throws SQLException SQL出錯時拋出。
      */
-    public void editCutPrice(int price) throws SQLException {
+    //TODO : 之後記得添加若是參數資料型態不符規定時的處理
+    public void editCutPrice(int price) {
         try{
             this.sql = "UPDATE cut SET price_per_cm = " + price;
             System.out.println("正在修改...");
@@ -55,6 +55,7 @@ public class cutDetailedPage extends rebarDetailedPage{
      * 方法，修改切割工程的出車費。
      * @param newBasicRevenue 欲修改得出車費。
      */
+    //TODO : 之後記得添加若是參數資料型態不符規定時的處理
     public void editBasicRevenue(int newBasicRevenue) {
         try {
             this.sql = "UPDATE cut SET basic_revenue =" + newBasicRevenue + " WHERE price_per_cm != -1;";

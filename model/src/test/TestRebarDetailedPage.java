@@ -42,14 +42,14 @@ public class TestRebarDetailedPage {
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
         // 將輸出目的地改回終端機。
+        test.closeResource();
     }
 
     /**
      * 測試添加新鋼筋到資料庫內。
-     * @throws SQLException SQL出錯時拋出。
      */
     @Test
-    public void testAddNewRebar() throws SQLException {
+    public void testAddNewRebar() {
         rebarDetailedPage test = new rebarDetailedPage();
         test.addNewRebar(15, 100.0f);
 
@@ -70,14 +70,14 @@ public class TestRebarDetailedPage {
                 """;
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+        test.closeResource();
     }
 
     /**
      * 測試新添加一個已經存在的鋼筋。
-     * @throws SQLException SQL出錯時拋出。
      */
     @Test
-    public void testAddNewRebarButAlreadyHad() throws SQLException {
+    public void testAddNewRebarButAlreadyHad() {
         rebarDetailedPage test = new rebarDetailedPage();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -88,15 +88,15 @@ public class TestRebarDetailedPage {
         String testTerminalString = "此種鋼筋已存在。\n";
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+        test.closeResource();
     }
 
 
     /**
      * 測試更改既有鋼筋的資料。
-     * @throws SQLException SQL出錯時拋出。
      */
     @Test
-    public void testEditRebarDetails() throws SQLException {
+    public void testEditRebarDetails() {
         rebarDetailedPage test = new rebarDetailedPage();
         test.editRebarDetail(3, 2.0f);
 
@@ -116,14 +116,14 @@ public class TestRebarDetailedPage {
                 """;
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+        test.closeResource();
     }
 
     /**
      * 方法，測試更改不存在的鋼筋數據。
-     * @throws SQLException SQL出錯時拋出。
      */
     @Test
-    public void testEditRebarDetailsButNotFound() throws SQLException {
+    public void testEditRebarDetailsButNotFound() {
         rebarDetailedPage test = new rebarDetailedPage();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -133,6 +133,7 @@ public class TestRebarDetailedPage {
         String testTerminalString = "未知的鋼筋編號\n";
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+        test.closeResource();
     }
 
     /**
@@ -160,6 +161,7 @@ public class TestRebarDetailedPage {
                 """;
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+        test.closeResource();
     }
 
     /**
@@ -176,6 +178,7 @@ public class TestRebarDetailedPage {
         String testTerminalString = "此鋼筋不存在。\n";
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+        test.closeResource();
     }
     // redraw()不需要測試因為在前列任何有修改資料庫的方法測試中都已經有測試到了。
 
@@ -203,6 +206,7 @@ public class TestRebarDetailedPage {
                 """;
         Assert.assertEquals(testTerminalString, outputStream.toString());
         System.setOut(System.out);
+        test.closeResource();
     }
 
     /**

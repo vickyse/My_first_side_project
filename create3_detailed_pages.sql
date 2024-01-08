@@ -45,7 +45,7 @@ CREATE TABLE hole_wash (
     PRIMARY KEY (size, depth)
 );
 
-INSERT INTO hole_wash (size, depth, basic_revenue) VALUES
+INSERT INTO hole_wash (size, depth, price) VALUES
 (1, 15, 350),
 (1, 20, 450),
 (1, 25, 550),
