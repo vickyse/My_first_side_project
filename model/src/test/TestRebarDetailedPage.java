@@ -90,8 +90,7 @@ public class TestRebarDetailedPage {
         System.setOut(System.out);
         test.closeResource();
     }
-
-
+    
     /**
      * 測試更改既有鋼筋的資料。
      */

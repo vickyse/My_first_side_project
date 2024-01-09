@@ -7,7 +7,7 @@ import java.util.Map;
  * 定義植筋、鋼筋頁面。
  */
 public class rebarDetailedPage {
-    public LinkedHashMap<Integer, Float> rebarDetails; // 屬性，用於儲存從MySQL中獲取的資料。
+    LinkedHashMap<Integer, Float> rebarDetails; // 屬性，用於儲存從MySQL中獲取的資料。
     public ResultSet rs;
     public Statement stmt;
     public Connection conn;

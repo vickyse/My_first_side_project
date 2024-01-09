@@ -24,4 +24,9 @@ WHERE (size, depth) = (1, 105);
 
 INSERT INTO hole_wash (size, depth, price, basic_revenue) VALUES
 (1, 15, 350, 1000);
--- 在測試hole_wash testtestDeleteHole之後執行。
+-- 在測試hole_wash testDeleteHole之後執行。
+
+UPDATE hole_wash
+SET price = 1000
+WHERE (size, depth) = (1, 15);
+-- 在測試hole_wash testEditHolePrice之後執行。

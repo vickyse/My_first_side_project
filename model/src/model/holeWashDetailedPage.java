@@ -152,6 +152,61 @@ public class holeWashDetailedPage extends rebarDetailedPage{
     }
 
     /**
+     * 方法，用於查詢給定口徑以及深度的報價。
+     * @param holeSize
+     * @param depth
+     */
+    public void getHoleDetails(float holeSize, int depth) {
+        try {
+            holeWashDetails.clear();
+            this.sql = "SELECT * FROM  hole_wash WHERE (size, depth) = " +
+                    "(" + holeSize + ", " + depth + ")";
+            this.stmt.executeQuery(this.sql);
+            this.rs = this.stmt.executeQuery(sql);
+
+            if (this.rs.next()) {
+                float holeSizeInResult = this.rs.getFloat("size");
+                int holeDepth = this.rs.getInt("depth");
+                int price = this.rs.getInt("price");
+
+                Pair<Float, Integer> pairKey = Pair.of(holeSizeInResult, depth);
+                holeWashDetails.put(pairKey, price);
+
+                for (Map.Entry<Pair<Float, Integer>, Integer> keyValue : holeWashDetails.entrySet()) {
+                    float keySize = keyValue.getKey().getLeft();
+                    int keyDepth = keyValue.getKey().getRight();
+                    int value = keyValue.getValue();
+
+                    System.out.println("孔的口徑: " + keySize + "吋 " + "孔的深度: " + keyDepth + "cm " + "價格為:" + value + "元");
+                }
+            } else {
+                System.out.println("不存在的口徑");
+            }
+        } catch (SQLException e) {
+            closeResource();
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 方法，修改指定口徑及深度的孔的報價。
+     */
+    public void editHolePrice(float holeSize, int depth, int price) {
+        if (holeWashDetails.containsKey(Pair.of(holeSize, depth))) {
+            try {
+                this.sql = "UPDATE hole_wash SET price = " + price +
+                        " WHERE (size, depth) = (" + holeSize + ", "  + depth + ");";
+                this.stmt.executeUpdate(this.sql);
+            } catch (SQLException se) {
+                closeResource();
+                se.printStackTrace();
+            }
+        } else {
+            System.out.println("不存在的孔。");
+        }
+    }
+
+    /**
      * 方法，重寫父類的同名方法。
      */
     @Override
@@ -188,6 +243,6 @@ public class holeWashDetailedPage extends rebarDetailedPage{
 
     public static void main(String[] args) {
         holeWashDetailedPage test = new holeWashDetailedPage();
-        test.getHoleDetails(1);
+        test.editHolePrice(1, 15, 10);
     }
 }

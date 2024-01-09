@@ -2,7 +2,7 @@ package model;
 import java.sql.*;
 
 public class cutDetailedPage extends rebarDetailedPage{
-    public int cut_price_per_cm;
+    private int cut_price_per_cm;
 
     /**
      * 初始化cutDetailedPage頁面。
