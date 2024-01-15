@@ -19,6 +19,7 @@ public class holeWashDetailedPage extends rebarDetailedPage{
     // 簡單鍵值對，而holeWashDetailedPage的HashMap則為(Pair<>, value)結構)，因此我們將holeWashDetails
     // 這個鍵值對改為static，表示當你呼叫holeWashDetailedPage的當下他的HashMap就會被初始化(在super之前)。
     // 因此就可以正確迭代。
+    // TODO:注意這個static可能會在GUI時造成影響，待解決。
 
     /**
      * 初始化holeWashDetailedPage。
@@ -239,10 +240,5 @@ public class holeWashDetailedPage extends rebarDetailedPage{
             closeResource();
             se.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        holeWashDetailedPage test = new holeWashDetailedPage();
-        test.editHolePrice(1, 15, 10);
     }
 }
