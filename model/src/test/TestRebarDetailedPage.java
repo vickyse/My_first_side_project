@@ -1,11 +1,10 @@
 package test;
+
 import model.rebarDetailedPage;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.sql.SQLException;
 
 
 /**

@@ -16,11 +16,13 @@ public class passwordPage {
 
     /**
      * 初始化。
+     * 可能是用在VIEW。
      */
     public passwordPage() {
         this.accessPass = false;
         this.passwordInputScanner = new Scanner(System.in);
         // 用於model。
+        this.passwordCheckInModel();
     }
 
     /**
@@ -44,9 +46,5 @@ public class passwordPage {
                 System.out.println("錯誤的密碼");
             }
         }
-    }
-
-    public static void main(String[] args) {
-        passwordPage test = new passwordPage();
     }
 }

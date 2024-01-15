@@ -1,4 +1,5 @@
 package model;
+
 import java.sql.*; // 導入JDBC。
 import java.util.LinkedHashMap; // 不使用HashMap的原因為HashMap的存儲是沒有依照SQL查詢順序的。
 import java.util.Map;
@@ -15,6 +16,7 @@ public class rebarDetailedPage {
 
     /**
      * 初始化rebarDetailedPage頁面。
+     * 可能是用在VIEW。
      */
     public rebarDetailedPage() {
         this.rebarDetails = new LinkedHashMap<>();
@@ -28,6 +30,7 @@ public class rebarDetailedPage {
     /**
      * 初始化鋼筋報價。會以"鋼筋編號: x 價格:y(元/cm)來表示。
      * 目前先以text形式建立，在做UI時必須改為GUI。
+     * 可能是用在VIEW。
      */
     public void initialiseDetailedPage() {
         try {
@@ -143,6 +146,7 @@ public class rebarDetailedPage {
 
     /**
      * 重繪方法，用於除了初始化頁面方法後的所有details繪製。
+     * 可能是用在VIEW。
      */
     public void redraw() {
         try {

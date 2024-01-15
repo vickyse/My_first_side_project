@@ -12,6 +12,7 @@ public class selectWorkTypeDetailsPage {
 
     /**
      * 呼叫此class的初始化。
+     * 可能是用在VIEW。
      */
     public selectWorkTypeDetailsPage() {
         this.workTypesAndIsSelected = new LinkedHashMap<>();
@@ -21,6 +22,7 @@ public class selectWorkTypeDetailsPage {
 
     /**
      * 內部初始化。
+     * 可能是用在VIEW。
      */
     public void initialiseSelectWorkTypeDetailsPage() {
         this.workTypesAndIsSelected.put("植筋", false);
@@ -65,4 +67,6 @@ public class selectWorkTypeDetailsPage {
             this.workTypesAndIsSelected.put("洗孔", true);
         }
     }
+
+    // TODO: redraw()。
 }

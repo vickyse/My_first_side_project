@@ -1,4 +1,5 @@
 package model;
+
 import java.sql.*;
 
 public class cutDetailedPage extends rebarDetailedPage{
@@ -6,11 +7,16 @@ public class cutDetailedPage extends rebarDetailedPage{
 
     /**
      * 初始化cutDetailedPage頁面。
+     * 可能是用在VIEW。
      */
     public cutDetailedPage() {
         super();
     } // 初始化。
 
+    /**
+     * 同名方法，用於初始化頁面。
+     * 可能用於VIEW。
+     */
     @Override
     public void initialiseDetailedPage() {
         try {
@@ -70,6 +76,7 @@ public class cutDetailedPage extends rebarDetailedPage{
 
     /**
      * 重繪切割的detailed page，用於使用其他增刪查改方法之後。
+     * 可能是用在VIEW。
      */
     @Override
     public void redraw() {

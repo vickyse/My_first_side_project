@@ -5,6 +5,10 @@ import java.util.Set;
 
 public class menu extends selectWorkTypeDetailsPage{
 
+    /**
+     * 覆寫父類同名方法。
+     * 可能是用在VIEW。
+     */
     @Override
     public void initialiseSelectWorkTypeDetailsPage() {
         this.workTypesAndIsSelected.put("表單", false);
@@ -17,6 +21,9 @@ public class menu extends selectWorkTypeDetailsPage{
         }
     }
 
+    /**
+     * 覆寫父類同名方法。
+     */
     @Override
     public void update() {
         if ((this.countForSelect % 3) == 0) {
@@ -33,4 +40,6 @@ public class menu extends selectWorkTypeDetailsPage{
             this.workTypesAndIsSelected.put("離開", true);
         }
     }
+
+    //TODO: redraw()。
 }

@@ -23,6 +23,7 @@ public class holeWashDetailedPage extends rebarDetailedPage{
 
     /**
      * 初始化holeWashDetailedPage。
+     * 可能是用在VIEW。
      */
     public holeWashDetailedPage() {
         super();
@@ -30,6 +31,7 @@ public class holeWashDetailedPage extends rebarDetailedPage{
 
     /**
      * 初始化holeWashDetailedPage。
+     * 可能是用在VIEW。
      */
     //TODO : 之後記得添加若是參數資料型態不符規定時的處理
     @Override
@@ -154,8 +156,8 @@ public class holeWashDetailedPage extends rebarDetailedPage{
 
     /**
      * 方法，用於查詢給定口徑以及深度的報價。
-     * @param holeSize
-     * @param depth
+     * @param holeSize 孔的口徑。
+     * @param depth 孔的深度。
      */
     public void getHoleDetails(float holeSize, int depth) {
         try {
@@ -209,6 +211,7 @@ public class holeWashDetailedPage extends rebarDetailedPage{
 
     /**
      * 方法，重寫父類的同名方法。
+     * 可能是用在VIEW。
      */
     @Override
     public void redraw() {
